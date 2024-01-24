@@ -1,14 +1,6 @@
 package se.iths.java23.logic;
 
-import se.iths.java23.dao.ResultDAO;
-
 public class BullsAndCows implements Playable{
-
-    private ResultDAO resultDao;     //dependency injection
-
-    public void setResultDao(ResultDAO resultDao) {
-        this.resultDao = resultDao;
-    }
 
     public String generateNumberOrWord(){
         String goal = "";
