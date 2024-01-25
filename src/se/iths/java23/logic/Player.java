@@ -2,10 +2,10 @@
 
 package se.iths.java23.logic;
 
-public class PlayerAverage {
+public class Player {
     private String name;
     private double average;
-    public PlayerAverage(String name, double average) {
+    public Player(String name, double average) {
         this.name = name;
         this.average = average;
     }
