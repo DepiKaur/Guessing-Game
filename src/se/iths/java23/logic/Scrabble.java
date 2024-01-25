@@ -46,7 +46,7 @@ public class Scrabble implements Game {
             }
         }
 
-        String result = "Correct: " + letterAtCorrectPosition + ",    Incorrect: " + letterAtIncorrectPosition;
+        String result = "Correct Position: " + letterAtCorrectPosition + "\nIncorrect Position: " + letterAtIncorrectPosition;
         return result;
     }
 }

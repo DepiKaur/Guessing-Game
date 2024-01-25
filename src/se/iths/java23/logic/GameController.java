@@ -42,10 +42,9 @@ public class GameController {
             String result = game.showResult(goal, guess);
             io.output(result + "\n");
 
-            //List<String> resultsOfDifferentGames = new ArrayList<>();
             String resultBullsAndCows = "BBBB,";
-            String resultScrabble = "Correct: 5,    Incorrect: 0";
-            //Collections.addAll(resultsOfDifferentGames, resultBullsAndCows, resultScrabble);
+            String resultScrabble = "Correct Position: 5\nIncorrect Position: 0";
+
             while (!result.equals(resultScrabble)) {
                 numOfGuess++;
                 guess = io.input();
