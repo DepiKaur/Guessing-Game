@@ -2,8 +2,7 @@ package se.iths.java23.logic;
 
 public interface Playable {
 
-    String generateNumberOrWord();
+    String generateSequence();
     String showResult(String numberOrWord, String guess);
 
-    boolean gameHasNotStarted();
 }

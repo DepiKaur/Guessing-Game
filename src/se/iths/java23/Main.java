@@ -10,8 +10,6 @@ import se.iths.java23.logic.Playable;
 
 import java.sql.SQLException;
 
-
-
 public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException, InterruptedException {
@@ -19,8 +17,8 @@ public class Main {
         IO io = new WindowIO();
         //IO io = new SystemIO();
         Playable game = new BullsAndCows();
-        GameController controller = new GameController(game, io);
-        controller.setDb(new DatabaseController());
+        DatabaseController dbController = new DatabaseController();
+        GameController controller = new GameController(game, io, dbController);
         controller.run();
     }
 }
