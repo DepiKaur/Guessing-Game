@@ -8,13 +8,15 @@ import se.iths.java23.io.IO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class GameController {
 
-    Playable game;
+    Game game;
     IO io;
     DatabaseController dbController;
-    public GameController(Playable game, IO io, DatabaseController dbController) {
+    public GameController(Game game, IO io, DatabaseController dbController) {
         this.game = game;
         this.io = io;
         this.dbController = dbController;
@@ -29,18 +31,22 @@ public class GameController {
         int id = dbController.login(playerName, io);
 
         while (isPlaying) {
-            String goal = game.generateSequence();
+            String goal = game.generateGoal();
             io.clear();
             io.output("New game:\n");
             //comment out or remove next line to play real games!
-            //io.output("For practice, number is: " + goal + "\n");
+            io.output("For practice, goal is: " + goal + "\n");
             String guess = io.input();
             io.output(guess +"\n");
             int numOfGuess = 1;
             String result = game.showResult(goal, guess);
             io.output(result + "\n");
 
-            while (!result.equals("BBBB,")) {
+            //List<String> resultsOfDifferentGames = new ArrayList<>();
+            String resultBullsAndCows = "BBBB,";
+            String resultScrabble = "Correct: 5,    Incorrect: 0";
+            //Collections.addAll(resultsOfDifferentGames, resultBullsAndCows, resultScrabble);
+            while (!result.equals(resultScrabble)) {
                 numOfGuess++;
                 guess = io.input();
                 io.output(guess +": ");

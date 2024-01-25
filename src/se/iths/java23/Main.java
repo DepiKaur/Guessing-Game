@@ -8,7 +8,8 @@ import se.iths.java23.io.SystemIO;
 import se.iths.java23.io.WindowIO;
 import se.iths.java23.logic.BullsAndCows;
 import se.iths.java23.logic.GameController;
-import se.iths.java23.logic.Playable;
+import se.iths.java23.logic.Game;
+import se.iths.java23.logic.Scrabble;
 
 import java.sql.SQLException;
 
@@ -18,7 +19,8 @@ public class Main {
 
         IO io = new WindowIO();
         //IO io = new SystemIO();
-        Playable game = new BullsAndCows();
+        //Game game = new BullsAndCows();
+        Game game = new Scrabble();
         DatabaseController dbController = new DatabaseController();
         GameController controller = new GameController(game, io, dbController);
         controller.run();

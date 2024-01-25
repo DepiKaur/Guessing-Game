@@ -2,9 +2,9 @@
 
 package se.iths.java23.logic;
 
-public interface Playable {
+public interface Game {
 
-    String generateSequence();
+    String generateGoal();
     String showResult(String numberOrWord, String guess);
 
 }
