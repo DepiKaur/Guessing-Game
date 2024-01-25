@@ -2,7 +2,7 @@ package se.iths.java23.logic;
 
 public class BullsAndCows implements Playable{
 
-    public String generateNumberOrWord(){
+    public String generateSequence(){
         String goal = "";
         for (int i = 0; i < 4; i++){
             int random = (int) (Math.random() * 10);
@@ -40,10 +40,5 @@ public class BullsAndCows implements Playable{
             result = result + "C";
         }
         return result;
-    }
-
-    @Override
-    public boolean gameHasNotStarted() {
-        return generateNumberOrWord().isEmpty();
     }
 }
