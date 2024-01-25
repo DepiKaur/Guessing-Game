@@ -9,17 +9,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseController {
-    Connection connection;
-    Statement statement;
-    ResultSet resultSet;
-    IO io;
+    private Connection connection;
+    private Statement statement;
+    private IO io;
 
     public DatabaseController() {
     }
 
-    public int login(String name) throws SQLException, InterruptedException {
-        connection = makeConnection();
-        resultSet = getAllByPlayerName(name);
+    public int login(String name, IO io) throws SQLException, InterruptedException {
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/moo","DepiAdmin","Depi1234");
+        ResultSet resultSet = getAllByPlayerName(name);
         if (resultSet.next()) {
             return resultSet.getInt("id");
         } else {
@@ -28,10 +27,6 @@ public class DatabaseController {
             io.exit();
             return 0;
         }
-    }
-
-    private Connection makeConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost/moo","DepiAdmin","Depi1234");
     }
 
     private ResultSet getAllByPlayerName(String name) throws SQLException {
