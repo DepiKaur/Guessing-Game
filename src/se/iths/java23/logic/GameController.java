@@ -2,6 +2,7 @@
 
 package se.iths.java23.logic;
 
+import se.iths.java23.database.Database;
 import se.iths.java23.database.DatabaseController;
 import se.iths.java23.io.IO;
 
@@ -11,22 +12,33 @@ import java.util.ArrayList;
 
 public class GameController {
 
-    Game game;
-    IO io;
-    DatabaseController dbController;
-    public GameController(Game game, IO io, DatabaseController dbController) {
+    private Game game;
+    private IO io;
+    private Database dbController;
+
+    private boolean isPlaying = true;
+
+    public void setPlaying(boolean playing) {
+        isPlaying = playing;
+    }
+
+    public GameController(Game game, IO io, Database dbController) {
         this.game = game;
         this.io = io;
         this.dbController = dbController;
     }
 
-    boolean isPlaying = true;
-
     public void run() throws SQLException, InterruptedException {
-
         io.output("Enter your user name:\n");
         String playerName = io.input();
-        int id = dbController.login(playerName, io);
+        int playerId = dbController.getPlayerIdByName(playerName);
+
+        if (playerId == 0) {
+            io.output("User not in database, please register with admin");
+            Thread.sleep(5000);
+            io.exit();
+        }
+
 
         while (isPlaying) {
             String goal = game.generateGoal();
@@ -43,50 +55,26 @@ public class GameController {
             String resultBullsAndCows = "BBBB,";
             String resultScrabble = "Correct Position: 5\nIncorrect Position: 0";
 
-            while (!result.equals(resultScrabble)) {
+            while (!result.equals(resultBullsAndCows)) {
                 numOfGuess++;
                 guess = io.input();
                 io.output(guess +": ");
                 result = game.showResult(goal, guess);
                 io.output(result + "\n");
             }
-            dbController.setResultForAnPlayer(numOfGuess, id);
+            dbController.setResultForAnPlayer(numOfGuess, playerId);
             showTopTen();
             isPlaying = io.yesNo("Correct, it took " + numOfGuess
                     + " guesses\nContinue?");
-
         }
         io.exit();
     }
 
-    private ArrayList<Player> getTopTen() throws SQLException {
-        ArrayList<Player> topTenPlayersList = new ArrayList<>();
-        ResultSet allPlayersRS = dbController.getAllPlayers();
-        ResultSet resultsByPlayerIdRS;
-        while(allPlayersRS.next()) {
-            int id = allPlayersRS.getInt("id");
-            String name = allPlayersRS.getString("name");
-            resultsByPlayerIdRS = dbController.getResultByPlayerId(id);
-            int nGames = 0;
-            int totalGuesses = 0;
-            while (resultsByPlayerIdRS.next()) {
-                nGames++;
-                totalGuesses += resultsByPlayerIdRS.getInt("result");
-            }
-            if (nGames > 0) {
-                topTenPlayersList.add(new Player(name, (double)totalGuesses/nGames));
-            }
-        }
-        return topTenPlayersList;
-    }
-
     private void showTopTen() throws SQLException {
-
-
         io.output("Top Ten List\n    Player     Average\n");
         int pos = 1;
 
-        ArrayList<Player> topTenPLayersList = getTopTen();
+        ArrayList<Player> topTenPLayersList = dbController.getTopTen();
         topTenPLayersList.sort((p1,p2)->(Double.compare(p1.getAverage(), p2.getAverage())));
         for (Player p : topTenPLayersList) {
             io.output(String.format("%3d %-10s%5.2f%n", pos, p.getName(), p.getAverage()));
