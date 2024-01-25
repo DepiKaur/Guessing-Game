@@ -3,7 +3,7 @@ package se.iths.java23.io;
 // IO Adapter
 public class WindowIO implements IO {
 
-    SimpleWindow sw = new SimpleWindow("");
+    SimpleWindow sw = new SimpleWindow("Bulls & Cows");
     @Override
     public String input() {
         return sw.getString();
