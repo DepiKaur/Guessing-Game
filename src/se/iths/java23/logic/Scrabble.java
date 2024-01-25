@@ -5,6 +5,7 @@ package se.iths.java23.logic;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class Scrabble implements Game {
     @Override
@@ -24,8 +25,9 @@ public class Scrabble implements Game {
                 "lumpy","bumpy","munch","packs","pecks","pinky","prick","mocks","ducks","frown",
                 "grate","notes","sport","mayor","flare","dirty","timer","tired","tried","fried");
 
-        Collections.shuffle(allWords);
-        return allWords.get(0);
+        Random random = new Random();
+        int randomNum = random.nextInt(allWords.size());
+        return allWords.get(randomNum);
     }
 
     @Override
