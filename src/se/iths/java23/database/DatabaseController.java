@@ -2,7 +2,6 @@
 
 package se.iths.java23.database;
 
-import se.iths.java23.io.IO;
 import se.iths.java23.logic.Player;
 
 import java.sql.Connection;

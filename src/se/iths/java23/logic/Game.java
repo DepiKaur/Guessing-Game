@@ -6,5 +6,4 @@ public interface Game {
 
     String generateGoal();
     String showResult(String numberOrWord, String guess);
-
 }

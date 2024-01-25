@@ -2,6 +2,7 @@
 
 package se.iths.java23;
 
+import se.iths.java23.database.Database;
 import se.iths.java23.database.DatabaseController;
 import se.iths.java23.io.IO;
 import se.iths.java23.io.SystemIO;
@@ -15,13 +16,13 @@ import java.sql.SQLException;
 
 public class Main {
 
-    public static void main(String[] args) throws ClassNotFoundException, SQLException, InterruptedException {
+    public static void main(String[] args) throws SQLException, InterruptedException {
 
         IO io = new WindowIO();
         //IO io = new SystemIO();
-        //Game game = new BullsAndCows();
-        Game game = new Scrabble();
-        DatabaseController dbController = new DatabaseController();
+        Game game = new BullsAndCows();
+        //Game game = new Scrabble();
+        Database dbController = new DatabaseController();
         GameController controller = new GameController(game, io, dbController);
         controller.run();
     }

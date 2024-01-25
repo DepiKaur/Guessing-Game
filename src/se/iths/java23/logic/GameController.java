@@ -3,10 +3,8 @@
 package se.iths.java23.logic;
 
 import se.iths.java23.database.Database;
-import se.iths.java23.database.DatabaseController;
 import se.iths.java23.io.IO;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -38,7 +36,6 @@ public class GameController {
             Thread.sleep(5000);
             io.exit();
         }
-
 
         while (isPlaying) {
             String goal = game.generateGoal();
@@ -80,6 +77,5 @@ public class GameController {
             io.output(String.format("%3d %-10s%5.2f%n", pos, p.getName(), p.getAverage()));
             if (pos++ == 10) break;
         }
-
     }
 }
