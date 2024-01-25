@@ -8,8 +8,6 @@ import se.iths.java23.io.IO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class GameController {
 
@@ -61,8 +59,8 @@ public class GameController {
         io.exit();
     }
 
-    private ArrayList<PlayerAverage> getTopTen() throws SQLException {
-        ArrayList<PlayerAverage> topTenPlayersList = new ArrayList<>();
+    private ArrayList<Player> getTopTen() throws SQLException {
+        ArrayList<Player> topTenPlayersList = new ArrayList<>();
         ResultSet allPlayersRS = dbController.getAllPlayers();
         ResultSet resultsByPlayerIdRS;
         while(allPlayersRS.next()) {
@@ -76,7 +74,7 @@ public class GameController {
                 totalGuesses += resultsByPlayerIdRS.getInt("result");
             }
             if (nGames > 0) {
-                topTenPlayersList.add(new PlayerAverage(name, (double)totalGuesses/nGames));
+                topTenPlayersList.add(new Player(name, (double)totalGuesses/nGames));
             }
         }
         return topTenPlayersList;
@@ -88,9 +86,9 @@ public class GameController {
         io.output("Top Ten List\n    Player     Average\n");
         int pos = 1;
 
-        ArrayList<PlayerAverage> topTenPLayersList = getTopTen();
+        ArrayList<Player> topTenPLayersList = getTopTen();
         topTenPLayersList.sort((p1,p2)->(Double.compare(p1.getAverage(), p2.getAverage())));
-        for (PlayerAverage p : topTenPLayersList) {
+        for (Player p : topTenPLayersList) {
             io.output(String.format("%3d %-10s%5.2f%n", pos, p.getName(), p.getAverage()));
             if (pos++ == 10) break;
         }
