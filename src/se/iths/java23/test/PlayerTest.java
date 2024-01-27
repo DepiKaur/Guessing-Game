@@ -1,9 +1,10 @@
 //Depinder Kaur, 2024-01-25, depinder.kaur@iths.se
 
-package se.iths.java23.logic;
+package se.iths.java23.test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import se.iths.java23.logic.Player;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

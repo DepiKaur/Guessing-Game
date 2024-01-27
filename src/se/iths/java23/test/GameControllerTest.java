@@ -1,11 +1,16 @@
 //Depinder Kaur, 2024-01-25, depinder.kaur@iths.se
 
-package se.iths.java23.logic;
+package se.iths.java23.test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import se.iths.java23.database.Database;
 import se.iths.java23.io.IO;
+import se.iths.java23.logic.BullsAndCows;
+import se.iths.java23.logic.Game;
+import se.iths.java23.logic.GameController;
+import se.iths.java23.logic.Player;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +19,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class GameControllerTest {
@@ -26,7 +30,7 @@ public class GameControllerTest {
 
     @BeforeEach
     public void setup(){
-        game = mock(BullsAndCows.class);
+        game = Mockito.mock(BullsAndCows.class);
         mockDB = new MockDB();
         mockIO = new MockIO();
         gameController = new GameController(game, mockIO, mockDB);
@@ -92,7 +96,7 @@ public class GameControllerTest {
         }
 
         public MockIO() {
-            inputs.add("player_test");
+            inputs.add("testPlayer");
             inputs.add("2356");
             inputs.add("5678");
         }
