@@ -18,10 +18,12 @@ public class Main {
 
     public static void main(String[] args) throws SQLException, InterruptedException {
 
-        IO io = new WindowIO();
-        //IO io = new SystemIO();
         Game game = new BullsAndCows();
         //Game game = new Scrabble();
+
+        IO io = new WindowIO(game);
+        //IO io = new SystemIO();
+
         Database dbController = new DatabaseController();
         GameController controller = new GameController(game, io, dbController);
         controller.run();

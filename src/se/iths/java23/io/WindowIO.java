@@ -2,9 +2,23 @@
 
 package se.iths.java23.io;
 
+import se.iths.java23.logic.BullsAndCows;
+import se.iths.java23.logic.Game;
+import se.iths.java23.logic.Scrabble;
+
 // IO Adapter
 public class WindowIO implements IO {
-    SimpleWindow sw = new SimpleWindow("Bulls & Cows");
+
+    SimpleWindow sw;
+
+    public WindowIO(Game game) {
+        if (game instanceof BullsAndCows) {
+            sw = new SimpleWindow("Bulls & Cows");
+        } else if (game instanceof Scrabble) {
+            sw = new SimpleWindow("Scrabble");
+        }
+    }
+
     @Override
     public String input() {
         return sw.getString();
