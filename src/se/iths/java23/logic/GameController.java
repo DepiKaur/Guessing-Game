@@ -49,10 +49,15 @@ public class GameController {
             String result = game.showResult(goal, guess);
             io.output(result + "\n");
 
-            String resultBullsAndCows = "BBBB,";
-            String resultScrabble = "Correct Position: 5\nIncorrect Position: 0";
+            String finalResult = null;
 
-            while (!result.equals(resultBullsAndCows)) {
+            if (game instanceof BullsAndCows) {
+                finalResult = "BBBB,";
+            } else if (game instanceof Scrabble) {
+                finalResult = "Correct Position: 5\nIncorrect Position: 0";
+            }
+
+            while (!result.equals(finalResult)) {
                 numOfGuess++;
                 guess = io.input();
                 io.output(guess +": ");
