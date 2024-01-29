@@ -8,6 +8,14 @@ import java.util.List;
 import java.util.Random;
 
 public class GuessTheWord implements Game {
+
+    private int numOfGuesses;
+
+    @Override
+    public int getNumOfGuesses() {
+        return numOfGuesses;
+    }
+
     @Override
     public String generateGoal() {
         List<String> allWords = new ArrayList<>();
@@ -16,7 +24,7 @@ public class GuessTheWord implements Game {
                 "owlet","fairy","faith","lunch","other","their","those","about","jumpy","quick",
                 "quack","flirt","jumbo","juicy","melon","crazy","field","glaze","joked","jinks",
                 "quake","quark","unzip","blaze","equip","fjord","freak","jerks","judge","mucky",
-                "squab","waltz","xylem","zincs","grain","bumpy","champ","craze","float","fishy",
+                "squab","waltz","cloth","zincs","grain","bumpy","champ","craze","float","fishy",
                 "picky","unbox","froze","topaz","wacky","zebra","black","brown","white","chunk",
                 "choke","comfy","dozen","equal","mixed","fixed","gazes","graze","shirt","inbox",
                 "lucky","lymph","pixel","quint","quids","squad","squid","waxed","zesty","spain",
@@ -31,7 +39,7 @@ public class GuessTheWord implements Game {
     }
 
     @Override
-    public String showResult(String goal, String guess) {
+    public String getResult(String goal, String guess) {
         guess += "     ";
         int letterAtIncorrectPosition = 0, letterAtCorrectPosition = 0;
         for (int i = 0; i < goal.length(); i++) {
@@ -45,8 +53,16 @@ public class GuessTheWord implements Game {
                 }
             }
         }
+        return "Correct Position: " + letterAtCorrectPosition +
+                "\nIncorrect Position: " + letterAtIncorrectPosition;
+    }
 
-        String result = "Correct Position: " + letterAtCorrectPosition + "\nIncorrect Position: " + letterAtIncorrectPosition;
-        return result;
+    @Override
+    public boolean isFinished(String result) {
+        if (!result.equals("Correct Position: 5\nIncorrect Position: 0")) {
+            numOfGuesses++;
+            return true;
+        }
+        return false;
     }
 }

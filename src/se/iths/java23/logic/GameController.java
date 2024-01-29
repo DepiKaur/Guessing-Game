@@ -2,17 +2,16 @@
 
 package se.iths.java23.logic;
 
-import se.iths.java23.database.Database;
+import se.iths.java23.database.DAO;
 import se.iths.java23.io.IO;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GameController {
 
     private Game game;
     private IO io;
-    private Database dbController;
+    private DAO daoController;
 
     private boolean isPlaying = true;
 
@@ -20,16 +19,16 @@ public class GameController {
         isPlaying = playing;
     }
 
-    public GameController(Game game, IO io, Database dbController) {
+    public GameController(Game game, IO io, DAO daoController) {
         this.game = game;
         this.io = io;
-        this.dbController = dbController;
+        this.daoController = daoController;
     }
 
-    public void run() throws SQLException, InterruptedException {
+    public void run() throws InterruptedException {
         io.output("Enter your user name:\n");
         String playerName = io.input();
-        int playerId = dbController.getPlayerIdByName(playerName);
+        int playerId = daoController.getPlayerIdByName(playerName);                 //login
 
         if (playerId == 0) {
             io.output("User not in database, please register with admin");
@@ -39,44 +38,32 @@ public class GameController {
 
         while (isPlaying) {
             String goal = game.generateGoal();
+            String guess, result;
             io.clear();
             io.output("New game:\n");
             //comment out or remove next line to play real games!
             io.output("For practice, goal is: " + goal + "\n");
-            String guess = io.input();
-            io.output(guess +"\n");
-            int numOfGuess = 1;
-            String result = game.showResult(goal, guess);
-            io.output(result + "\n");
 
-            String finalResult = null;
-
-            if (game instanceof BullsAndCows) {
-                finalResult = "BBBB,";
-            } else if (game instanceof GuessTheWord) {
-                finalResult = "Correct Position: 5\nIncorrect Position: 0";
-            }
-
-            while (!result.equals(finalResult)) {
-                numOfGuess++;
+            do {
                 guess = io.input();
                 io.output(guess +": ");
-                result = game.showResult(goal, guess);
+                result = game.getResult(goal, guess);
                 io.output(result + "\n");
-            }
-            dbController.setResultForAnPlayer(numOfGuess, playerId);
+            } while (!game.isFinished(result));
+
+            daoController.setResultForAnPlayer(game.getNumOfGuesses(), playerId);
             showTopTen();
-            isPlaying = io.yesNo("Correct, it took " + numOfGuess
+            isPlaying = io.yesNo("Correct, it took " + game.getNumOfGuesses()
                     + " guesses\nContinue?");
         }
         io.exit();
     }
 
-    private void showTopTen() throws SQLException {
+    private void showTopTen() {
         io.output("Top Ten List\n    Player     Average\n");
         int pos = 1;
 
-        ArrayList<Player> topTenPLayersList = dbController.getTopTen();
+        ArrayList<Player> topTenPLayersList = daoController.getTopTen();
         topTenPLayersList.sort((p1,p2)->(Double.compare(p1.getAverage(), p2.getAverage())));
         for (Player p : topTenPLayersList) {
             io.output(String.format("%3d %-10s%5.2f%n", pos, p.getName(), p.getAverage()));

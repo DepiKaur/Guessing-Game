@@ -5,5 +5,7 @@ package se.iths.java23.logic;
 public interface Game {
 
     String generateGoal();
-    String showResult(String numberOrWord, String guess);
+    int getNumOfGuesses();
+    String getResult(String numberOrWord, String guess);
+    boolean isFinished(String result);
 }

@@ -27,16 +27,16 @@ public class BullsAndCowsTest {
 
     @Test
     public void showResult() {
-        String result1 = game.showResult("1234","2134");
+        String result1 = game.getResult("1234","2134");
         assertEquals("BB,CC", result1);
 
-        String result2 = game.showResult("1234",null);     //verifies when user enters nothing
+        String result2 = game.getResult("1234",null);     //verifies when user enters nothing
         assertEquals(",", result2);
 
-        String result3 = game.showResult("1234", "5671");
+        String result3 = game.getResult("1234", "5671");
         assertEquals(",C", result3);
 
-        String result4 = game.showResult("1234", "abcd");
+        String result4 = game.getResult("1234", "abcd");
         assertEquals(",", result4);
     }
 }

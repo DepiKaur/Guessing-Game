@@ -27,23 +27,23 @@ public class GuessTheWordTest {
 
     @Test
     public void showResultTest() {
-        String result1 = game.showResult("fairy", null);
+        String result1 = game.getResult("fairy", null);
         String expectedResult1 = "Correct Position: 0\nIncorrect Position: 0";
         assertEquals(expectedResult1, result1);
 
-        String result2 = game.showResult("fairy", "query");
+        String result2 = game.getResult("fairy", "query");
         String expectedResult2 = "Correct Position: 2\nIncorrect Position: 0";
         assertEquals(expectedResult2, result2);
 
-        String result3 = game.showResult("fairy", "raiyf");
+        String result3 = game.getResult("fairy", "raiyf");
         String expectedResult3 = "Correct Position: 2\nIncorrect Position: 3";
         assertEquals(expectedResult3, result3);
 
-        String result4 = game.showResult("fairy", "fairy");
+        String result4 = game.getResult("fairy", "fairy");
         String expectedResult4 = "Correct Position: 5\nIncorrect Position: 0";
         assertEquals(expectedResult4, result4);
 
-        String result5 = game.showResult("fairy", "FAIRY");
+        String result5 = game.getResult("fairy", "FAIRY");
         String expectedResult5 = "Correct Position: 0\nIncorrect Position: 0";
         assertEquals(expectedResult5, result5);
     }

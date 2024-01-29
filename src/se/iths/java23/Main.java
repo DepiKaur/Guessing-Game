@@ -2,8 +2,8 @@
 
 package se.iths.java23;
 
-import se.iths.java23.database.Database;
-import se.iths.java23.database.DatabaseController;
+import se.iths.java23.database.DAO;
+import se.iths.java23.database.DAOController;
 import se.iths.java23.io.IO;
 import se.iths.java23.io.WindowIO;
 import se.iths.java23.logic.BullsAndCows;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException, InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
 
         Game game = new BullsAndCows();
         //Game game = new Scrabble();
@@ -22,7 +22,7 @@ public class Main {
         IO io = new WindowIO(game);
         //IO io = new SystemIO();
 
-        Database dbController = new DatabaseController();
+        DAO dbController = new DAOController();
         GameController controller = new GameController(game, io, dbController);
         controller.run();
     }

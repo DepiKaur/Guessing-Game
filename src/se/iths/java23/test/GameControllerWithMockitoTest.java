@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import se.iths.java23.database.Database;
+import se.iths.java23.database.DAO;
 import se.iths.java23.io.IO;
 import se.iths.java23.logic.Game;
 import se.iths.java23.logic.GameController;
@@ -34,7 +34,7 @@ public class GameControllerWithMockitoTest {
     private MockIO mockIO;
 
     @Mock
-    private Database dbController;
+    private DAO dbController;
 
     private GameController gameController;
 
@@ -100,8 +100,8 @@ public class GameControllerWithMockitoTest {
 
         when(dbController.getPlayerIdByName(anyString())).thenReturn(2);
         when(game.generateGoal()).thenReturn("5678");
-        when(game.showResult("5678","2356")).thenReturn(",CC");
-        when(game.showResult("5678","5678")).thenReturn("BBBB,");
+        when(game.getResult("5678","2356")).thenReturn(",CC");
+        when(game.getResult("5678","5678")).thenReturn("BBBB,");
 
         ArrayList<Player> topTenPlayers = new ArrayList<>();
         Collections.addAll(topTenPlayers, p1, p2, p3);
@@ -113,7 +113,7 @@ public class GameControllerWithMockitoTest {
         assertEquals(11, mockIO.getOutputs().size());
         verify(dbController, atMostOnce()).getPlayerIdByName(anyString());
         verify(dbController, atLeast(1)).getTopTen();
-        verify(game, times(2)).showResult(anyString(), anyString());
+        verify(game, times(2)).getResult(anyString(), anyString());
     }
 
 

@@ -5,7 +5,7 @@ package se.iths.java23.test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import se.iths.java23.database.Database;
+import se.iths.java23.database.DAO;
 import se.iths.java23.io.IO;
 import se.iths.java23.logic.BullsAndCows;
 import se.iths.java23.logic.Game;
@@ -39,37 +39,37 @@ public class GameControllerTest {
     @Test
     public void testRunWithValidPlayer() throws SQLException, InterruptedException {
         when(game.generateGoal()).thenReturn("5678");
-        when(game.showResult("5678","2356")).thenReturn(",CC");
-        when(game.showResult("5678","5678")).thenReturn("BBBB,");
+        when(game.getResult("5678","2356")).thenReturn(",CC");
+        when(game.getResult("5678","5678")).thenReturn("BBBB,");
         gameController.run();
 
         assertEquals(11, mockIO.getOutputs().size());
     }
 
-    class MockDB implements Database{
+    class MockDB implements DAO {
 
         @Override
-        public int getPlayerIdByName(String name) throws SQLException {
+        public int getPlayerIdByName(String name) {
             return 2;
         }
 
         @Override
-        public void setResultForAnPlayer(int numOfGuesses, int playerId) throws SQLException {
+        public void setResultForAnPlayer(int numOfGuesses, int playerId) {
 
         }
 
         @Override
-        public ResultSet getAllPlayers() throws SQLException {
+        public ResultSet getAllPlayers() {
             return null;
         }
 
         @Override
-        public ResultSet getResultByPlayerId(int playerId) throws SQLException {
+        public ResultSet getResultByPlayerId(int playerId) {
             return null;
         }
 
         @Override
-        public ArrayList<Player> getTopTen() throws SQLException {
+        public ArrayList<Player> getTopTen() {
             ArrayList<Player> players = new ArrayList<>();
 
             Player p1 = new Player("testPlayer",3.5);
