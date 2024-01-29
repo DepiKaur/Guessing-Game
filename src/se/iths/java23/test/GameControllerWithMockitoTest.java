@@ -13,7 +13,6 @@ import se.iths.java23.logic.Game;
 import se.iths.java23.logic.GameController;
 import se.iths.java23.logic.Player;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -93,7 +92,7 @@ public class GameControllerWithMockitoTest {
     }
 
     @Test
-    public void testRunWithValidPlayer() throws SQLException, InterruptedException {
+    public void testRunWithValidPlayer() throws InterruptedException {
         Player p1 = new Player("Player1", 3.57);
         Player p2 = new Player("Player2", 4.39);
         Player p3 = new Player("Player3", 3.92);
@@ -101,7 +100,9 @@ public class GameControllerWithMockitoTest {
         when(dbController.getPlayerIdByName(anyString())).thenReturn(2);
         when(game.generateGoal()).thenReturn("5678");
         when(game.getResult("5678","2356")).thenReturn(",CC");
+        when(game.matchesGoal(",CC")).thenReturn(false);
         when(game.getResult("5678","5678")).thenReturn("BBBB,");
+        when(game.matchesGoal("BBBB,")).thenReturn(true);
 
         ArrayList<Player> topTenPlayers = new ArrayList<>();
         Collections.addAll(topTenPlayers, p1, p2, p3);
@@ -115,6 +116,4 @@ public class GameControllerWithMockitoTest {
         verify(dbController, atLeast(1)).getTopTen();
         verify(game, times(2)).getResult(anyString(), anyString());
     }
-
-
 }

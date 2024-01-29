@@ -7,5 +7,5 @@ public interface Game {
     String generateGoal();
     int getNumOfGuesses();
     String getResult(String numberOrWord, String guess);
-    boolean isFinished(String result);
+    boolean matchesGoal(String result);
 }

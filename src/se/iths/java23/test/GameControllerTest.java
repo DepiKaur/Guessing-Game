@@ -13,7 +13,6 @@ import se.iths.java23.logic.GameController;
 import se.iths.java23.logic.Player;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,12 +36,15 @@ public class GameControllerTest {
     }
 
     @Test
-    public void testRunWithValidPlayer() throws SQLException, InterruptedException {
+    public void testRunWithValidPlayer() throws InterruptedException {
         when(game.generateGoal()).thenReturn("5678");
         when(game.getResult("5678","2356")).thenReturn(",CC");
+        when(game.matchesGoal(",CC")).thenReturn(false);
         when(game.getResult("5678","5678")).thenReturn("BBBB,");
+        when(game.matchesGoal("BBBB,")).thenReturn(true);
         gameController.run();
 
+        assertEquals(0, mockIO.getInputs().size());
         assertEquals(11, mockIO.getOutputs().size());
     }
 
@@ -72,9 +74,9 @@ public class GameControllerTest {
         public ArrayList<Player> getTopTen() {
             ArrayList<Player> players = new ArrayList<>();
 
-            Player p1 = new Player("testPlayer",3.5);
-            Player p2 = new Player("testPlayer2",3.9);
-            Player p3 = new Player("testPlayer3",1.9);
+            Player p1 = new Player("Ann",3.5);
+            Player p2 = new Player("Bob",3.9);
+            Player p3 = new Player("Dave",1.9);
 
             Collections.addAll(players,p1,p2,p3);
 
@@ -103,8 +105,8 @@ public class GameControllerTest {
 
         @Override
         public String input() {
-            String value = inputs.get(0);
-            inputs.remove(0);
+            String value = getInputs().get(0);
+            getInputs().remove(0);
             return value;
         }
 

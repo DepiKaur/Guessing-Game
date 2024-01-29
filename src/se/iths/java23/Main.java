@@ -5,12 +5,11 @@ package se.iths.java23;
 import se.iths.java23.database.DAO;
 import se.iths.java23.database.DAOController;
 import se.iths.java23.io.IO;
+import se.iths.java23.io.SystemIO;
 import se.iths.java23.io.WindowIO;
 import se.iths.java23.logic.BullsAndCows;
 import se.iths.java23.logic.GameController;
 import se.iths.java23.logic.Game;
-
-import java.sql.SQLException;
 
 public class Main {
 

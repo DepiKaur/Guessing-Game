@@ -58,11 +58,11 @@ public class GuessTheWord implements Game {
     }
 
     @Override
-    public boolean isFinished(String result) {
-        if (!result.equals("Correct Position: 5\nIncorrect Position: 0")) {
-            numOfGuesses++;
+    public boolean matchesGoal(String result) {
+        if (result.equals("Correct Position: 5\nIncorrect Position: 0")) {
             return true;
         }
+        numOfGuesses++;
         return false;
     }
 }

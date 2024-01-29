@@ -38,18 +38,23 @@ public class GameController {
 
         while (isPlaying) {
             String goal = game.generateGoal();
-            String guess, result;
+            String guess, guessResult;
             io.clear();
             io.output("New game:\n");
             //comment out or remove next line to play real games!
             io.output("For practice, goal is: " + goal + "\n");
 
-            do {
+            boolean guessed = false;
+
+            while(!guessed){
                 guess = io.input();
                 io.output(guess +": ");
-                result = game.getResult(goal, guess);
-                io.output(result + "\n");
-            } while (!game.isFinished(result));
+                guessResult = game.getResult(goal, guess);
+                io.output(guessResult + "\n");
+                if(game.matchesGoal(guessResult)){
+                    guessed = true;
+                }
+            }
 
             daoController.setResultForAnPlayer(game.getNumOfGuesses(), playerId);
             showTopTen();
