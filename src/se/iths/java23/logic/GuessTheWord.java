@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Scrabble implements Game {
+public class GuessTheWord implements Game {
     @Override
     public String generateGoal() {
         List<String> allWords = new ArrayList<>();

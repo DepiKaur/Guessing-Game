@@ -5,17 +5,17 @@ package se.iths.java23.test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.iths.java23.logic.Game;
-import se.iths.java23.logic.Scrabble;
+import se.iths.java23.logic.GuessTheWord;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ScrabbleTest {
+public class GuessTheWordTest {
 
     private Game game;
 
     @BeforeEach
     public void setup() {
-        game = new Scrabble();
+        game = new GuessTheWord();
     }
 
     @Test

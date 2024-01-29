@@ -58,7 +58,7 @@ public class GameControllerWithMockitoTest {
         }
 
         public MockIO() {
-            inputs.add("player_test");
+            inputs.add("TestPlayer");
             inputs.add("2356");
             inputs.add("5678");
         }

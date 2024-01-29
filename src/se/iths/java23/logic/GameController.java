@@ -53,7 +53,7 @@ public class GameController {
 
             if (game instanceof BullsAndCows) {
                 finalResult = "BBBB,";
-            } else if (game instanceof Scrabble) {
+            } else if (game instanceof GuessTheWord) {
                 finalResult = "Correct Position: 5\nIncorrect Position: 0";
             }
 

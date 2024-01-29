@@ -4,7 +4,7 @@ package se.iths.java23.io;
 
 import se.iths.java23.logic.BullsAndCows;
 import se.iths.java23.logic.Game;
-import se.iths.java23.logic.Scrabble;
+import se.iths.java23.logic.GuessTheWord;
 
 // IO Adapter
 public class WindowIO implements IO {
@@ -14,7 +14,7 @@ public class WindowIO implements IO {
     public WindowIO(Game game) {
         if (game instanceof BullsAndCows) {
             sw = new SimpleWindow("Bulls & Cows");
-        } else if (game instanceof Scrabble) {
+        } else if (game instanceof GuessTheWord) {
             sw = new SimpleWindow("Scrabble");
         }
     }
