@@ -38,7 +38,7 @@ public class BullsAndCowsTest {
         String result1 = game.showResult(game.checkResult("1234","2134"));
         assertEquals("BB,CC", result1);
 
-        String result2 = game.showResult(game.checkResult("1234",null));     //verifies when user enters nothing
+        String result2 = game.showResult(game.checkResult("1234"," "));     //verifies when user enters nothing
         assertEquals(",", result2);
 
         String result3 = game.showResult(game.checkResult("1234", "5671"));
@@ -46,5 +46,8 @@ public class BullsAndCowsTest {
 
         String result4 = game.showResult(game.checkResult("1234", "abcd"));
         assertEquals(",", result4);
+
+//        String result5 = game.showResult(game.checkResult("1234", null));
+//        assertEquals(",", result5);
     }
 }

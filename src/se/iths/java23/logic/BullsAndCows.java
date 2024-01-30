@@ -17,7 +17,6 @@ public class BullsAndCows implements GuessingGame {
         return "" + digits.get(0) + digits.get(1) + digits.get(2) + digits.get(3);
     }
 
-
     public GuessEvaluation checkResult(String number, String guess) {
         int cows = 0, bulls = 0;
         for (int i = 0; i < number.length(); i++) {

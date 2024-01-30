@@ -7,7 +7,7 @@ import se.iths.java23.io.IO;
 
 import java.util.ArrayList;
 
-public class GuessingGameEngine {
+public class GameController {
 
     private GuessingGame game;
     private IO io;
@@ -19,13 +19,13 @@ public class GuessingGameEngine {
         isPlaying = playing;
     }
 
-    public GuessingGameEngine(GuessingGame game, IO io, PlayerDao playerDao) {
+    public GameController(GuessingGame game, IO io, PlayerDao playerDao) {
         this.game = game;
         this.io = io;
         this.playerDao = playerDao;
     }
 
-    public void run() throws InterruptedException {
+    public void play() throws InterruptedException {
         io.output("Enter your user name:\n");
         String playerName = io.input();
         int playerId = playerDao.getPlayerIdByName(playerName);              //login
@@ -56,7 +56,7 @@ public class GuessingGameEngine {
                 }
             }
 
-            playerDao.setResultForAnPlayer(game.getNumOfGuesses(), playerId);
+            playerDao.setResultForAPlayer(game.getNumOfGuesses(), playerId);
             showTopTen();
             isPlaying = io.yesNo("Correct, it took " + game.getNumOfGuesses()
                     + " guesses\nContinue?");
