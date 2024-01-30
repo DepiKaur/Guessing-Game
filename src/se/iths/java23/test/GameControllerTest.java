@@ -10,7 +10,7 @@ import se.iths.java23.io.IO;
 import se.iths.java23.logic.BullsAndCows;
 import se.iths.java23.logic.GuessEvaluation;
 import se.iths.java23.logic.GuessingGame;
-import se.iths.java23.logic.GuessingGameEngine;
+import se.iths.java23.logic.GameController;
 import se.iths.java23.logic.Player;
 
 import java.sql.ResultSet;
@@ -21,9 +21,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class GuessingGameEngineTest {
+public class GameControllerTest {
 
-    private GuessingGameEngine gameEngine;
+    private GameController gameController;
     private GuessingGame game;
     private MockDao mockDao;
     private MockIO mockIO;
@@ -33,7 +33,7 @@ public class GuessingGameEngineTest {
         mockIO = new MockIO();
         mockDao = new MockDao();
         game = Mockito.mock(BullsAndCows.class);
-        gameEngine = new GuessingGameEngine(game, mockIO, mockDao);
+        gameController = new GameController(game, mockIO, mockDao);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class GuessingGameEngineTest {
         when(game.checkResult("5678","5678")).thenReturn(guessEv2);
         when(game.showResult(guessEv2)).thenReturn("BBBB,");
         when(game.isFinished("BBBB,")).thenReturn(true);
-        gameEngine.run();
+        gameController.play();
 
         assertEquals(0, mockIO.getInputs().size());
         assertEquals(11, mockIO.getOutputs().size());
@@ -63,7 +63,7 @@ public class GuessingGameEngineTest {
         }
 
         @Override
-        public void setResultForAnPlayer(int numOfGuesses, int playerId) {
+        public void setResultForAPlayer(int numOfGuesses, int playerId) {
 
         }
 
@@ -135,7 +135,7 @@ public class GuessingGameEngineTest {
 
         @Override
         public void exit() {
-            gameEngine.setPlaying(false);
+            gameController.setPlaying(false);
         }
     }
 }

@@ -11,7 +11,7 @@ import se.iths.java23.database.PlayerDao;
 import se.iths.java23.io.IO;
 import se.iths.java23.logic.GuessEvaluation;
 import se.iths.java23.logic.GuessingGame;
-import se.iths.java23.logic.GuessingGameEngine;
+import se.iths.java23.logic.GameController;
 import se.iths.java23.logic.Player;
 
 import java.util.ArrayList;
@@ -27,9 +27,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class GuessingGameEngineWithMockitoTest {
+public class GameControllerWithMockitoTest {
 
-    private GuessingGameEngine gameEngine;
+    private GameController gameController;
 
     @Mock
     private GuessingGame game;
@@ -42,7 +42,7 @@ public class GuessingGameEngineWithMockitoTest {
     @BeforeEach
     public void setup() {
         mockIO = new MockIO();
-        gameEngine = new GuessingGameEngine(game, mockIO, playerDao);
+        gameController = new GameController(game, mockIO, playerDao);
     }
 
     class MockIO implements IO {
@@ -89,7 +89,7 @@ public class GuessingGameEngineWithMockitoTest {
 
         @Override
         public void exit() {
-            gameEngine.setPlaying(false);
+            gameController.setPlaying(false);
         }
     }
 
@@ -116,7 +116,7 @@ public class GuessingGameEngineWithMockitoTest {
         Collections.addAll(topTenPlayers, p1, p2, p3);
         when(playerDao.getTopTen()).thenReturn(topTenPlayers);
 
-        gameEngine.run();
+        gameController.play();
 
         assertEquals(0, mockIO.getInputs().size());
         assertEquals(11, mockIO.getOutputs().size());

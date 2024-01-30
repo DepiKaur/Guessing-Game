@@ -44,7 +44,7 @@ public class DatabasePlayerDao implements PlayerDao {
         }
     }
 
-    public void setResultForAnPlayer(int numOfGuesses, int playerId) {
+    public void setResultForAPlayer(int numOfGuesses, int playerId) {
         try {
             statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO results (result, playerid) VALUES (" + numOfGuesses + ", " +playerId + ")" );

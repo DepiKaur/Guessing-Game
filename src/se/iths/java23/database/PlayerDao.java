@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public interface PlayerDao {
 
     int getPlayerIdByName(String name);
-    void setResultForAnPlayer(int numOfGuesses, int playerId);
+    void setResultForAPlayer(int numOfGuesses, int playerId);
     ResultSet getAllPlayers();
     ResultSet getResultByPlayerId(int playerId);
     ArrayList<Player> getTopTen();
