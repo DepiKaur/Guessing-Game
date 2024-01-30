@@ -5,7 +5,7 @@ import se.iths.java23.logic.Player;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public interface DAO {
+public interface PlayerDao {
 
     int getPlayerIdByName(String name);
     void setResultForAnPlayer(int numOfGuesses, int playerId);

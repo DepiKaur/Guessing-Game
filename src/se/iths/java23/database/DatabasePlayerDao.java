@@ -11,15 +11,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class DAOController implements DAO {
+public class DatabasePlayerDao implements PlayerDao {
     private Connection connection;
     private Statement statement;
 
-    public DAOController() {
+    public DatabasePlayerDao() {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost/moo","DepiAdmin","Depi1234");
         } catch (SQLException e) {
-            throw new RuntimeException("DAOController Constructor error: " + e);
+            throw new RuntimeException("DatabasePlayerDao Constructor error: " + e);
         }
     }
 
@@ -31,7 +31,7 @@ public class DAOController implements DAO {
             }
             return 0;
         } catch (SQLException e) {
-            throw new RuntimeException("DAOController getPlayerIdByName error: " + e);
+            throw new RuntimeException("DatabasePlayerDao getPlayerIdByName error: " + e);
         }
     }
 
@@ -40,7 +40,7 @@ public class DAOController implements DAO {
             statement = connection.createStatement();
             return statement.executeQuery("select id,name from players where name = '" + name + "'");
         } catch (SQLException e) {
-            throw new RuntimeException("DAOController getAllByPlayerName error: " + e);
+            throw new RuntimeException("DatabasePlayerDao getAllByPlayerName error: " + e);
         }
     }
 
@@ -49,7 +49,7 @@ public class DAOController implements DAO {
             statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO results (result, playerid) VALUES (" + numOfGuesses + ", " +playerId + ")" );
         } catch (SQLException e) {
-            throw new RuntimeException("DAOController setResultForAnPlayer error: " + e);
+            throw new RuntimeException("DatabasePlayerDao setResultForAnPlayer error: " + e);
         }
     }
 
@@ -58,7 +58,7 @@ public class DAOController implements DAO {
             statement = connection.createStatement();
             return statement.executeQuery("select * from players");
         } catch (SQLException e) {
-            throw new RuntimeException("DAOController getAllPlayers error: " + e);
+            throw new RuntimeException("DatabasePlayerDao getAllPlayers error: " + e);
         }
     }
 
@@ -67,7 +67,7 @@ public class DAOController implements DAO {
             statement = connection.createStatement();
             return statement.executeQuery("select * from results where playerid = " + playerId);
         } catch (SQLException e) {
-            throw new RuntimeException("DAOController getResultByPlayerId error: " + e);
+            throw new RuntimeException("DatabasePlayerDao getResultByPlayerId error: " + e);
         }
     }
 
@@ -91,7 +91,7 @@ public class DAOController implements DAO {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("DAOController getTopTen error: " + e);
+            throw new RuntimeException("DatabasePlayerDao getTopTen error: " + e);
         }
         return topTenPlayersList;
     }

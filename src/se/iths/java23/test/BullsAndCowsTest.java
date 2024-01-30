@@ -3,15 +3,17 @@
 package se.iths.java23.test;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import se.iths.java23.logic.BullsAndCows;
-import se.iths.java23.logic.Game;
+import se.iths.java23.logic.GuessingGame;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class BullsAndCowsTest {
 
-    private Game game;
+    private GuessingGame game;
 
     @BeforeEach
     public void setup() {
@@ -20,23 +22,29 @@ public class BullsAndCowsTest {
 
     @Test
     public void generateGoalTest() {
-        String randomNum = game.generateGoal();
+        String randomNum = game.generateNumberOrWord();
         assertEquals(4, randomNum.length());     //verifies that generated number has 4 digits
         assertEquals(4, randomNum.chars().distinct().count());     //verifies that generated number has 4 distinct digits
     }
 
+    @RepeatedTest(100)
+    public void generateARandomNumberWithDistinctDigits() {
+        String randomNum = game.generateNumberOrWord();
+        assertNotEquals("1111", randomNum);
+    }
+
     @Test
     public void showResult() {
-        String result1 = game.getResult("1234","2134");
+        String result1 = game.showResult(game.checkResult("1234","2134"));
         assertEquals("BB,CC", result1);
 
-        String result2 = game.getResult("1234",null);     //verifies when user enters nothing
+        String result2 = game.showResult(game.checkResult("1234",null));     //verifies when user enters nothing
         assertEquals(",", result2);
 
-        String result3 = game.getResult("1234", "5671");
+        String result3 = game.showResult(game.checkResult("1234", "5671"));
         assertEquals(",C", result3);
 
-        String result4 = game.getResult("1234", "abcd");
+        String result4 = game.showResult(game.checkResult("1234", "abcd"));
         assertEquals(",", result4);
     }
 }

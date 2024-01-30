@@ -2,27 +2,26 @@
 
 package se.iths.java23;
 
-import se.iths.java23.database.DAO;
-import se.iths.java23.database.DAOController;
+import se.iths.java23.database.DatabasePlayerDao;
+import se.iths.java23.database.PlayerDao;
 import se.iths.java23.io.IO;
-import se.iths.java23.io.SystemIO;
 import se.iths.java23.io.WindowIO;
 import se.iths.java23.logic.BullsAndCows;
-import se.iths.java23.logic.GameController;
-import se.iths.java23.logic.Game;
+import se.iths.java23.logic.GuessingGameEngine;
+import se.iths.java23.logic.GuessingGame;
 
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Game game = new BullsAndCows();
-        //Game game = new Scrabble();
+        GuessingGame game = new BullsAndCows();
+        //GuessingGame game = new GuessTheWord();
 
         IO io = new WindowIO(game);
         //IO io = new SystemIO();
 
-        DAO dbController = new DAOController();
-        GameController controller = new GameController(game, io, dbController);
+        PlayerDao playerDao = new DatabasePlayerDao();
+        GuessingGameEngine controller = new GuessingGameEngine(game, io, playerDao);
         controller.run();
     }
 }

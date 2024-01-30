@@ -7,10 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import se.iths.java23.database.DAO;
+import se.iths.java23.database.PlayerDao;
 import se.iths.java23.io.IO;
-import se.iths.java23.logic.Game;
-import se.iths.java23.logic.GameController;
+import se.iths.java23.logic.GuessEvaluation;
+import se.iths.java23.logic.GuessingGame;
+import se.iths.java23.logic.GuessingGameEngine;
 import se.iths.java23.logic.Player;
 
 import java.util.ArrayList;
@@ -26,21 +27,22 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class GameControllerWithMockitoTest {
+public class GuessingGameEngineWithMockitoTest {
+
+    private GuessingGameEngine gameEngine;
+
     @Mock
-    private Game game;
+    private GuessingGame game;
+
+    @Mock
+    private PlayerDao playerDao;
 
     private MockIO mockIO;
-
-    @Mock
-    private DAO dbController;
-
-    private GameController gameController;
 
     @BeforeEach
     public void setup() {
         mockIO = new MockIO();
-        gameController = new GameController(game, mockIO, dbController);
+        gameEngine = new GuessingGameEngine(game, mockIO, playerDao);
     }
 
     class MockIO implements IO {
@@ -87,7 +89,7 @@ public class GameControllerWithMockitoTest {
 
         @Override
         public void exit() {
-            gameController.setPlaying(false);
+            gameEngine.setPlaying(false);
         }
     }
 
@@ -97,23 +99,29 @@ public class GameControllerWithMockitoTest {
         Player p2 = new Player("Player2", 4.39);
         Player p3 = new Player("Player3", 3.92);
 
-        when(dbController.getPlayerIdByName(anyString())).thenReturn(2);
-        when(game.generateGoal()).thenReturn("5678");
-        when(game.getResult("5678","2356")).thenReturn(",CC");
-        when(game.matchesGoal(",CC")).thenReturn(false);
-        when(game.getResult("5678","5678")).thenReturn("BBBB,");
-        when(game.matchesGoal("BBBB,")).thenReturn(true);
+        when(playerDao.getPlayerIdByName(anyString())).thenReturn(2);
+        when(game.generateNumberOrWord()).thenReturn("5678");
+
+        GuessEvaluation guessEv1 = new GuessEvaluation(0,2);
+        when(game.checkResult("5678","2356")).thenReturn(guessEv1);
+        when(game.showResult(guessEv1)).thenReturn(",CC");
+        when(game.isFinished(",CC")).thenReturn(false);
+
+        GuessEvaluation guessEv2 = new GuessEvaluation(4,0);
+        when(game.checkResult("5678","5678")).thenReturn(guessEv2);
+        when(game.showResult(guessEv2)).thenReturn("BBBB,");
+        when(game.isFinished("BBBB,")).thenReturn(true);
 
         ArrayList<Player> topTenPlayers = new ArrayList<>();
         Collections.addAll(topTenPlayers, p1, p2, p3);
-        when(dbController.getTopTen()).thenReturn(topTenPlayers);
+        when(playerDao.getTopTen()).thenReturn(topTenPlayers);
 
-        gameController.run();
+        gameEngine.run();
 
         assertEquals(0, mockIO.getInputs().size());
         assertEquals(11, mockIO.getOutputs().size());
-        verify(dbController, atMostOnce()).getPlayerIdByName(anyString());
-        verify(dbController, atLeast(1)).getTopTen();
-        verify(game, times(2)).getResult(anyString(), anyString());
+        verify(playerDao, atMostOnce()).getPlayerIdByName(anyString());
+        verify(playerDao, atLeast(1)).getTopTen();
+        verify(game, times(2)).checkResult(anyString(),anyString());
     }
 }

@@ -7,17 +7,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class GuessTheWord implements Game {
+public class GuessTheWord implements GuessingGame {
 
     private int numOfGuesses;
 
     @Override
-    public int getNumOfGuesses() {
-        return numOfGuesses;
-    }
-
-    @Override
-    public String generateGoal() {
+    public String generateNumberOrWord() {
         List<String> allWords = new ArrayList<>();
         Collections.addAll(allWords, "sharp","shelf","shine","slice","solid","space",
                 "stand","stone","earth","ebony","eight","entry","extra","towel","cloth","clown",
@@ -39,12 +34,17 @@ public class GuessTheWord implements Game {
     }
 
     @Override
-    public String getResult(String goal, String guess) {
+    public String showResult(GuessEvaluation guessEvaluation) {
+        return "Correct Position: " + guessEvaluation.valueCountAtCorrectPlace() + "\nIncorrect Position: " + guessEvaluation.valueCountAtIncorrectPlace();
+    }
+
+
+    public GuessEvaluation checkResult(String numberOrWord, String guess) {
         guess += "     ";
         int letterAtIncorrectPosition = 0, letterAtCorrectPosition = 0;
-        for (int i = 0; i < goal.length(); i++) {
+        for (int i = 0; i < numberOrWord.length(); i++) {
             for (int j = 0; j < guess.length(); j++) {
-                if (goal.charAt(i) == guess.charAt(j)) {
+                if (numberOrWord.charAt(i) == guess.charAt(j)) {
                     if (i == j) {
                         letterAtCorrectPosition++;
                     } else {
@@ -53,16 +53,22 @@ public class GuessTheWord implements Game {
                 }
             }
         }
-        return "Correct Position: " + letterAtCorrectPosition +
-                "\nIncorrect Position: " + letterAtIncorrectPosition;
+
+        return new GuessEvaluation(letterAtCorrectPosition, letterAtIncorrectPosition);
+        //"Correct Position: " + letterAtCorrectPosition +"\nIncorrect Position: " + letterAtIncorrectPosition;
     }
 
     @Override
-    public boolean matchesGoal(String result) {
+    public boolean isFinished(String result) {
         if (result.equals("Correct Position: 5\nIncorrect Position: 0")) {
             return true;
         }
         numOfGuesses++;
         return false;
+    }
+
+    @Override
+    public int getNumOfGuesses() {
+        return numOfGuesses;
     }
 }

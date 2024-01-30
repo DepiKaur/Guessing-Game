@@ -2,60 +2,62 @@
 
 package se.iths.java23.logic;
 
-public class BullsAndCows implements Game {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class BullsAndCows implements GuessingGame {
 
     private int numOfGuesses = 1;
 
-    public int getNumOfGuesses() {
-        return numOfGuesses;
+    public String generateNumberOrWord() {
+        List<Integer> digits = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 0));
+        Collections.shuffle(digits);
+        // pick four unique digits
+        return "" + digits.get(0) + digits.get(1) + digits.get(2) + digits.get(3);
     }
 
-    public String generateGoal() {
-        String goal = "";
-        for (int i = 0; i < 4; i++) {
-            int random = (int) (Math.random() * 10);
-            String randomDigit = "" + random;
-            while (goal.contains(randomDigit)) {
-                random = (int) (Math.random() * 10);
-                randomDigit = "" + random;
-            }
-            goal = goal + randomDigit;
-        }
-        return goal;
-    }
 
-    @Override
-    public String getResult(String secretNum, String guess) {
-        guess += "    ";              //to avoid IndexOutOfBoundsException when guess is empty
+    public GuessEvaluation checkResult(String number, String guess) {
         int cows = 0, bulls = 0;
-        for (int i = 0; i < 4; i++){                            //should've used secretNum.length() instead of hard code 4
-            for (int j = 0; j < 4; j++ ) {                        //should've used guess.length() instead of hard code 4, code checks only first 4 digits
-                if (secretNum.charAt(i) == guess.charAt(j)){
-                    if (i == j) {
-                        bulls++;
-                    } else {
-                        cows++;
-                    }
-                }
+        for (int i = 0; i < number.length(); i++) {
+            char digitInNumber = number.charAt(i);
+
+            int positionInGuess = guess.indexOf(digitInNumber);
+            boolean digitPresentInGuess = (positionInGuess != -1);
+
+            if (i == positionInGuess) {
+                bulls++;
+            } else if (digitPresentInGuess) {
+                cows++;
             }
         }
+        return new GuessEvaluation(bulls, cows);
+    }
+
+    public String showResult(GuessEvaluation guessEvaluation) {
+
         String result = "";
-        for (int i = 0; i < bulls; i++){
+        for (int i = 0; i < guessEvaluation.valueCountAtCorrectPlace(); i++) {
             result = result + "B";
         }
         result = result + ",";
-        for (int i = 0; i < cows; i++){
+        for (int i = 0; i < guessEvaluation.valueCountAtIncorrectPlace(); i++) {
             result = result + "C";
         }
         return result;
     }
 
     @Override
-    public boolean matchesGoal(String guessResult) {
+    public boolean isFinished(String guessResult) {
         if (guessResult.equals("BBBB,")) {
             return true;
         }
         numOfGuesses++;
         return false;
+    }
+
+    public int getNumOfGuesses() {
+        return numOfGuesses;
     }
 }

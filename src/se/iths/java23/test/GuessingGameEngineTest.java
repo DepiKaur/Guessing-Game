@@ -5,11 +5,12 @@ package se.iths.java23.test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import se.iths.java23.database.DAO;
+import se.iths.java23.database.PlayerDao;
 import se.iths.java23.io.IO;
 import se.iths.java23.logic.BullsAndCows;
-import se.iths.java23.logic.Game;
-import se.iths.java23.logic.GameController;
+import se.iths.java23.logic.GuessEvaluation;
+import se.iths.java23.logic.GuessingGame;
+import se.iths.java23.logic.GuessingGameEngine;
 import se.iths.java23.logic.Player;
 
 import java.sql.ResultSet;
@@ -20,35 +21,41 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class GameControllerTest {
+public class GuessingGameEngineTest {
 
-    private GameController gameController;
-    private Game game ;
-    private MockDB mockDB;
+    private GuessingGameEngine gameEngine;
+    private GuessingGame game;
+    private MockDao mockDao;
     private MockIO mockIO;
 
     @BeforeEach
     public void setup(){
-        game = Mockito.mock(BullsAndCows.class);
-        mockDB = new MockDB();
         mockIO = new MockIO();
-        gameController = new GameController(game, mockIO, mockDB);
+        mockDao = new MockDao();
+        game = Mockito.mock(BullsAndCows.class);
+        gameEngine = new GuessingGameEngine(game, mockIO, mockDao);
     }
 
     @Test
     public void testRunWithValidPlayer() throws InterruptedException {
-        when(game.generateGoal()).thenReturn("5678");
-        when(game.getResult("5678","2356")).thenReturn(",CC");
-        when(game.matchesGoal(",CC")).thenReturn(false);
-        when(game.getResult("5678","5678")).thenReturn("BBBB,");
-        when(game.matchesGoal("BBBB,")).thenReturn(true);
-        gameController.run();
+        when(game.generateNumberOrWord()).thenReturn("5678");
+
+        GuessEvaluation guessEv1 = new GuessEvaluation(0,2);
+        when(game.checkResult("5678","2356")).thenReturn(guessEv1);
+        when(game.showResult(guessEv1)).thenReturn(",CC");
+        when(game.isFinished(",CC")).thenReturn(false);
+
+        GuessEvaluation guessEv2 = new GuessEvaluation(4,0);
+        when(game.checkResult("5678","5678")).thenReturn(guessEv2);
+        when(game.showResult(guessEv2)).thenReturn("BBBB,");
+        when(game.isFinished("BBBB,")).thenReturn(true);
+        gameEngine.run();
 
         assertEquals(0, mockIO.getInputs().size());
         assertEquals(11, mockIO.getOutputs().size());
     }
 
-    class MockDB implements DAO {
+    class MockDao implements PlayerDao {
 
         @Override
         public int getPlayerIdByName(String name) {
@@ -128,7 +135,7 @@ public class GameControllerTest {
 
         @Override
         public void exit() {
-            gameController.setPlaying(false);
+            gameEngine.setPlaying(false);
         }
     }
 }
