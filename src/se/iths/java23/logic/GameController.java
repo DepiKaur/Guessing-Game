@@ -44,15 +44,15 @@ public class GameController {
             //comment out or remove next line to play real games!
             io.output("For practice, goal is: " + secretNumber + "\n");
 
-            boolean guessed = false;
+            boolean isGuessed = false;
 
-            while(!guessed){
+            while(!isGuessed){
                 guess = io.input();
                 io.output(guess + ": ");
                 result = game.showResult(game.checkResult(secretNumber, guess));
                 io.output(result + "\n");
                 if (game.isFinished(result)) {
-                    guessed = true;
+                    isGuessed = true;
                 }
             }
 

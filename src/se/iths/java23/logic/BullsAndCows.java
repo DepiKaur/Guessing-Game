@@ -20,11 +20,11 @@ public class BullsAndCows implements GuessingGame {
     public GuessEvaluation checkResult(String number, String guess) {
         int cows = 0, bulls = 0;
         for (int i = 0; i < number.length(); i++) {
-            char digitInNumber = number.charAt(i);
+            char digitInNumber = number.charAt(i);              //gets digit of the secret number at a specific index
 
-            int positionInGuess = guess.indexOf(digitInNumber);
-            boolean digitPresentInGuess = (positionInGuess != -1);
-
+            int positionInGuess = guess.indexOf(digitInNumber);      //gets index of the digit in the guessed number
+            boolean digitPresentInGuess = (positionInGuess != -1);     //if digit is present in guess, position >= 0
+                                                                       //if digit is absent in guess, position = -1
             if (i == positionInGuess) {
                 bulls++;
             } else if (digitPresentInGuess) {
