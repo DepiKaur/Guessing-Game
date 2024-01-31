@@ -1,11 +1,19 @@
-//Depinder Kaur, 2024-01-24, depinder.kaur@iths.se
-
 package se.iths.java23.logic;
 
 import se.iths.java23.database.PlayerDao;
 import se.iths.java23.io.IO;
 
 import java.util.ArrayList;
+
+/**
+ * @author Depinder Kaur
+ * created on 2024-01-24
+ * @version 1.0
+ * <p>
+ * GameController
+ * <p>
+ * This controls the flow of the game and even shows the top ten players when a game is finished.
+ */
 
 public class GameController {
 
@@ -25,6 +33,14 @@ public class GameController {
         this.playerDao = playerDao;
     }
 
+    /**
+     * This method starts the game, asks the player to login, checks if the player is already present
+     * in the database.
+     * A secret number/word gets generated which the player needs to guess.
+     * Note that there is no restriction on the number of guesses.
+     * When guessed correctly, the number of guesses is shown & the player is asked if he wants to continue or not.
+     * @throws InterruptedException
+     */
     public void play() throws InterruptedException {
         io.output("Enter your user name:\n");
         String playerName = io.input();
@@ -64,13 +80,16 @@ public class GameController {
         io.exit();
     }
 
+    /**
+     * Sorts the list of players according to player average in the ascending order and then shows the first 10 players.
+     */
     private void showTopTen() {
         io.output("Top Ten List\n    Player     Average\n");
         int position = 1;
 
-        ArrayList<Player> topTenPLayersList = playerDao.getTopTen();
-        topTenPLayersList.sort((p1,p2)->(Double.compare(p1.getAverage(), p2.getAverage())));
-        for (Player p : topTenPLayersList) {
+        ArrayList<Player> allPlayers = playerDao.getAllPlayersAverage();
+        allPlayers.sort((p1,p2)->(Double.compare(p1.getAverage(), p2.getAverage())));
+        for (Player p : allPlayers) {
             io.output(String.format("%3d %-10s%5.2f%n", position, p.getName(), p.getAverage()));
             if (position++ == 10) break;
         }
