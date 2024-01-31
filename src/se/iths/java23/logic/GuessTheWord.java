@@ -7,10 +7,10 @@ import java.util.Random;
 
 /**
  * @author Depinder Kaur
- * created on 2024-01-25
+ * @date 2024-01-25
  * @version 1.0
  * <p>
- * GuessTheWord
+ * <h2>GuessTheWord</h2>
  * <p>
  * GuessTheWord implements all the methods in the GuessingGame interface.
  * In this game, the user should guess a 5-letter word with distinct letters.

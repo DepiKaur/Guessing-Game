@@ -2,7 +2,7 @@ package se.iths.java23.logic;
 
 /**
  * @author Depinder Kaur
- * created on 2024-01-23
+ * @date 2024-01-23
  * @version 1.0
  * <p>
  * Player

@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 /**
  * @author Depinder Kaur
- * created on 2024-01-24
+ * @date 2024-01-24
  * @version 1.0
  * <p>
- * GameController
+ * <h2>GameController</h2>
  * <p>
  * This controls the flow of the game and even shows the top ten players when a game is finished.
  */

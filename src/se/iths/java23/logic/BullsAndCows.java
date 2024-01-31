@@ -6,12 +6,12 @@ import java.util.List;
 
 /**
  * @author Depinder Kaur
- * created on 2024-01-23
+ * @date 2024-01-23
  * @version 1.0
  * <p>
- * BullsAndCows
+ * <h2>BullsAndCows</h2>
  * <p>
- * BullsAndCows implements all the methods in the GuessingGame interface.
+ * BullsAndCows implements all the methods in the <i>GuessingGame</i> interface.
  * In this game, the user should guess a 4-digit number with distinct digits.
  */
 
