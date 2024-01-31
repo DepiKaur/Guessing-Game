@@ -19,16 +19,10 @@ public class Player {
         this.average = average;
     }
 
-    /**
-     * @return Name of the player
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @return Average of the player
-     */
     public double getAverage() {
         return average;
     }
