@@ -19,7 +19,6 @@ import java.util.concurrent.BlockingQueue;
  * It provides a UI-window to interact with the user and get inputs.
  */
 
-
 public class SimpleWindow {
     private JFrame window;
     private JTextArea text;

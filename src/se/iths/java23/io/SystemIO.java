@@ -36,9 +36,9 @@ public class SystemIO implements IO {
     }
 
     /**
-     * This method asks the user if he wants to continue playing the guessing game,
+     * This method asks the user if he wants to continue to play the guessing game,
      * after he has correctly guessed the secret number/word.
-     * @param input Here the user is asked if he wants to continue playing the guessing game.
+     * @param input This asks the user if he wants to continue to play the guessing game.
      * @return A boolean value which decides if the game will continue or not.
      */
     @Override
