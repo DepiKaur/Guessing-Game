@@ -1,5 +1,3 @@
-//Depinder Kaur, 2024-01-23, depinder.kaur@iths.se
-
 package se.iths.java23.io;
 
 import javax.swing.*;
@@ -9,6 +7,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+
+/**
+ * @author Ulf Bilting
+ * @date 2024-01-16
+ * @version 1.0
+ * <p>
+ * <h2>SimpleWindow</h2>
+ * <p>
+ * SimpleWindow implements all the methods in the <i>IO</i> interface.
+ * It provides a UI-window to interact with the user and get inputs.
+ */
 
 
 public class SimpleWindow {
@@ -50,8 +59,6 @@ public class SimpleWindow {
         window.setVisible(true);
     }
 
-
-
     private class GoListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             try {
@@ -63,8 +70,6 @@ public class SimpleWindow {
             }
         }
     }
-
-
 
     public boolean yesNo(String prompt) {
         int answer = JOptionPane.showConfirmDialog(null, prompt);
@@ -81,21 +86,16 @@ public class SimpleWindow {
         }
     }
 
-
     public void addString(String s){
         text.append(s);
     }
-
 
     public void clear(){
         text.setText("");
     }
 
-
     public void exit() {
         window.dispose();
         System.exit(0);
     }
-
-
 }

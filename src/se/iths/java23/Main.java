@@ -1,5 +1,3 @@
-//Depinder Kaur, 2024-01-23, depinder.kaur@iths.se
-
 package se.iths.java23;
 
 import se.iths.java23.database.DatabasePlayerDao;
@@ -35,8 +33,8 @@ public class Main {
         GuessingGame game = new BullsAndCows();
         //GuessingGame game = new GuessTheWord();
 
-        IO io = new WindowIO(game);
-        //IO io = new SystemIO();
+        //IO io = new WindowIO(game);
+        IO io = new SystemIO();
 
         PlayerDao playerDao = new DatabasePlayerDao();
         GameController controller = new GameController(game, io, playerDao);

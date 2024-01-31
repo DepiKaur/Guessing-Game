@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * <p>
  * <h2>PlayerDao</h2>
  * PlayerDao is the interface which provides some methods to get a player's info
- * using player's id, name and even the number of guesses it took to guess the
+ * using player's id, name and even the number of guesses it takes to guess the
  * secret number/word.
  */
 

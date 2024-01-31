@@ -20,7 +20,7 @@ public class BullsAndCows implements GuessingGame {
     private int numOfGuesses = 1;
 
     /**
-     * Returns a 4-digit number of type String.
+     * This method returns a 4-digit number of type String.
      * An ArrayList containing digits from 0 to 9 is shuffled. The final number is obtained by concatenating
      * an empty String with digits at the first four indices of the shuffled Arraylist.
      * @return a 4-digit number with different digits and of type String
@@ -45,11 +45,11 @@ public class BullsAndCows implements GuessingGame {
     public GuessEvaluation checkResult(String number, String guess) {
         int cows = 0, bulls = 0;
         for (int i = 0; i < number.length(); i++) {
-            char digitInNumber = number.charAt(i);              //gets digit of the secret number at a specific index
+            char digitInNumber = number.charAt(i);
 
-            int positionInGuess = guess.indexOf(digitInNumber);      //gets index of the digit in the guessed number
-            boolean digitPresentInGuess = (positionInGuess != -1);     //if digit is present in guess, position >= 0
-                                                                       //if digit is absent in guess, position = -1
+            int positionInGuess = guess.indexOf(digitInNumber);
+            boolean digitPresentInGuess = (positionInGuess != -1);
+
             if (i == positionInGuess) {
                 bulls++;
             } else if (digitPresentInGuess) {
@@ -60,8 +60,8 @@ public class BullsAndCows implements GuessingGame {
     }
 
     /**
-     * Returns a String of B (bulls) and C (cows) using the GuessEvaluation argument
-     * which has the info about the number of bulls and number of cows.
+     * This method returns a String of B (bulls) and C (cows) using the GuessEvaluation
+     * argument which has the info about the number of bulls and number of cows.
      * Note that the Bs are concatenated with Cs using a comma.
      * @param guessEvaluation It has the number of bulls and cows as its parameters.
      * @return A String of Bs (i.e. bulls) and Cs (i.e. cows)
@@ -95,8 +95,7 @@ public class BullsAndCows implements GuessingGame {
     }
 
     /**
-     * Returns the number of guesses it takes to guess the generated secret number.
-     * @return The number of guesses.
+     * This method returns the number of guesses it takes to guess the generated secret number.
      */
     public int getNumOfGuesses() {
         return numOfGuesses;
