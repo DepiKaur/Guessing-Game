@@ -21,8 +21,8 @@ public class GuessTheWord implements GuessingGame {
     private int numOfGuesses;
 
     /**
-     * In this method, a list of 5-letter words is created. Then a random number is generated with the size of
-     * this list as its upper bound and a random word is selected from the given list.
+     * In this method, a list of 5-letter words is created. Then a random number is generated
+     * with the size of this list as its upper bound and a random word is selected from the given list.
      * @return A randomly selected word from a list of words.
      */
     @Override
@@ -48,8 +48,8 @@ public class GuessTheWord implements GuessingGame {
     }
 
     /**
-     * This method returns a new Object of type GuessEvaluation which saves the number of correct positions and
-     * number of incorrect positions in the player's guess.
+     * This method returns a new Object of type GuessEvaluation which saves the number of
+     * correct positions and number of incorrect positions in the player's guess.
      * @param numberOrWord This is the secret word chosen from the list of words.
      * @param guess This is the word guessed by the player.
      * @return A new object of type GuessEvaluation.
@@ -73,9 +73,10 @@ public class GuessTheWord implements GuessingGame {
     }
 
     /**
-     * This method shows the number of the correct positions and incorrect positions of letters in
-     * the player's guessed word.
-     * @param guessEvaluation This contains the integer values of the number of correct positions and incorrect positions.
+     * This method shows the number of the correct positions and incorrect
+     * positions of letters in the player's guessed word.
+     * @param guessEvaluation This contains the integer values of the number
+     *                        of correct positions and incorrect positions.
      * @return A String which shows the result of the player's guess.
      */
     @Override

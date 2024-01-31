@@ -33,11 +33,10 @@ public class BullsAndCows implements GuessingGame {
     }
 
     /**
-     * Returns a new object of type GuessEvaluation (a record) which saves the number of bulls and cows.
-     * This method goes through all the digits in the secret (or generated) number, checks if these digits are present
-     * in the guessed number by getting their index.
-     * If a digit has the same index as in the secret number, it is counted as a bull, if the digit has a different
-     * index, it's a cow.
+     * This method goes through all the digits in the secret (or generated) number, checks if
+     * these digits are present in the guessed number by getting their index.
+     * If a digit has the same index as in the secret number, it is counted as a bull,
+     * if the digit has a different index, it's a cow.
      * The number of bulls and cows is then saved in the form of a new object of record GuessEvaluation.
      * @param number This is the secret number which is the actual goal for the guessing game.
      * @param guess This is the number (type String) which is guessed by the player.
@@ -61,8 +60,9 @@ public class BullsAndCows implements GuessingGame {
     }
 
     /**
-     * Returns a String of B (bulls) and C (cows) using the GuessEvaluation argument which has the info about the number
-     * of bulls and number of cows. Note that the Bs are concatenated with Cs using a comma.
+     * Returns a String of B (bulls) and C (cows) using the GuessEvaluation argument
+     * which has the info about the number of bulls and number of cows.
+     * Note that the Bs are concatenated with Cs using a comma.
      * @param guessEvaluation It has the number of bulls and cows as its parameters.
      * @return A String of Bs (i.e. bulls) and Cs (i.e. cows)
      */
