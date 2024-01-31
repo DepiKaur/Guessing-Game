@@ -114,14 +114,14 @@ public class GameControllerWithMockitoTest {
 
         ArrayList<Player> topTenPlayers = new ArrayList<>();
         Collections.addAll(topTenPlayers, p1, p2, p3);
-        when(playerDao.getTopTen()).thenReturn(topTenPlayers);
+        when(playerDao.getAllPlayersAverage()).thenReturn(topTenPlayers);
 
         gameController.play();
 
         assertEquals(0, mockIO.getInputs().size());
         assertEquals(11, mockIO.getOutputs().size());
         verify(playerDao, atMostOnce()).getPlayerIdByName(anyString());
-        verify(playerDao, atLeast(1)).getTopTen();
+        verify(playerDao, atLeast(1)).getAllPlayersAverage();
         verify(game, times(2)).checkResult(anyString(),anyString());
     }
 }

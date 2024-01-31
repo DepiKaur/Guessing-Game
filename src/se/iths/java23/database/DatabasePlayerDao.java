@@ -71,7 +71,7 @@ public class DatabasePlayerDao implements PlayerDao {
         }
     }
 
-    public ArrayList<Player> getTopTen() {
+    public ArrayList<Player> getAllPlayersAverage() {
         ArrayList<Player> topTenPlayersList = new ArrayList<>();
         try {
             ResultSet allPlayersRS = getAllPlayers();

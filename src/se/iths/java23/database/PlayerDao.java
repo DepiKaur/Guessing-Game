@@ -11,5 +11,5 @@ public interface PlayerDao {
     void setResultForAPlayer(int numOfGuesses, int playerId);
     ResultSet getAllPlayers();
     ResultSet getResultByPlayerId(int playerId);
-    ArrayList<Player> getTopTen();
+    ArrayList<Player> getAllPlayersAverage();
 }

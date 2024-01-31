@@ -78,7 +78,7 @@ public class GameControllerTest {
         }
 
         @Override
-        public ArrayList<Player> getTopTen() {
+        public ArrayList<Player> getAllPlayersAverage() {
             ArrayList<Player> players = new ArrayList<>();
 
             Player p1 = new Player("Ann",3.5);
