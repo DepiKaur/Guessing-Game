@@ -37,7 +37,7 @@ public class GameController {
      * This method starts the game with a player who is already present in the database.
      * A secret number/word gets generated which the player needs to guess.
      * Note that there is no restriction on the number of guesses.
-     * When guessed correctly, the number of guesses is shown & the player is asked if he wants to continue or not.
+     * When guessed correctly, the number of guesses is shown and the player is asked if he wants to continue or not.
      * @throws InterruptedException
      */
     public void play(IO io, PlayerDao playerDao) throws InterruptedException {
