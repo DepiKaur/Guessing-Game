@@ -9,8 +9,8 @@ In this application, there is a possibility to choose between 2 guessing games-
  *  Guess The Word
 
 One can even choose between 2 available User Interfaces-
- *  Graphic window
- *  Console
+ *  Graphic window or `WindowIO in this application`
+ *  Console or `SystemIO in this application`
 
 All these must be chosen in the `main` method present in the `Main` class, before starting the application.
 
