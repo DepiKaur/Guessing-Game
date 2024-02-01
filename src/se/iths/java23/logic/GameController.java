@@ -57,6 +57,7 @@ public class GameController {
             String guess, result;
             io.clear();
             io.output("New game:\n");
+
             //comment out or remove next line to play real games!
             io.output("For practice, goal is: " + secretNumber + "\n");
 
