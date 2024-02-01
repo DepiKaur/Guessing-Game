@@ -29,20 +29,20 @@ In the following example, let's assume that the secret number is `1234`.
 ```bat
 New game:
 
-4567:
+4567:       //guess1
 ,           //no digit matches with digits in secret number
 
-2146:
+2146:       //guess2
 ,CCC        //digits (1-2-4) match, but incorrect position
 
-2164:
+2164:       //guess3
 B,CC        //digit (4) at correct position, 
               digits (1-2) at incorrect position
 
-1264:
+1264:       //guess4
 BBB,        //digits (1-2-4) at correct position
 
-1234:
+1234:       //guess5
 BBBB,       //guess matches secret number
 ```
 where
@@ -66,19 +66,19 @@ in the application. In the following example, let's assume that the secret (or s
 ```bat
 New game:
 
-fruit:
+fruit:                         //guess1 
 Correct Position: 0            //no match found
 Incorrect Position: 0
 
-crazy:
+crazy:                         //guess2 
 Correct Position: 1            //letter a
 Incorrect Position: 1          //letter c
 
-slice:
+slice:                         //guess3 
 Correct Position: 3            //letters s,c,e 
 Incorrect Position: 0 
 
-space:
+space:                         //guess4 
 Correct Position: 5            //guess matches secret word 
 Incorrect Position: 0         
 ```
