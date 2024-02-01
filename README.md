@@ -15,10 +15,6 @@ One can even choose between 2 available User Interfaces-
 All these must be chosen in the `main` method present in the `Main` class, before starting the application.
 
 When the application starts, the player is asked to enter username.
-```bat
-Enter your user name:
-```
-
 If the user does not exist in database, the following message appears on the screen
 ```bat
 User not in database, please register with admin
@@ -28,11 +24,32 @@ However, if the user already exists in database, the guessing game starts.
 
 ### Instructions to play "*Bulls & Cows*"
 
-If one chooses to play *Bulls & Cows*, a 4-digit random number gets generated.
+If one chooses to play *Bulls & Cows*, a 4-digit number gets generated randomly.
+In the following example, let's assume that the secret number is `1234`.
 ```bat
 New game:
+
+4567:
+,           //no digit matches with digits in secret number
+
+2146:
+,CCC        //digits (1-2-4) match, but incorrect position
+
+2164:
+B,CC        //digit (4) at correct position, 
+              digits (1-2) at incorrect position
+
+1264:
+BBB,        //digits (1-2-4) at correct position
+
+1234:
+BBBB,       //guess matches secret number
 ```
-NOTE: The randomly generated number has 4 distinct digits.
+where
+* Bull `B` means that a digit has been placed correctly
+* Cow `C` means that a digit is present in the secret number, but at another position.
+
+NOTE: The randomly generated number has 4 _distinct_ digits.
 
 As of now, there is no restriction on the number of guesses it takes to guess the secret (or randomly generated) number.
 So the game continues till the player guesses correctly. Once the goal is reached, a list of top-ten players and their 
@@ -44,12 +61,28 @@ The application then asks if the player wants to continue playing the guessing g
 
 ### Instructions to play "*Guess The Word*"
 
-If one chooses to play *Guess The Word*, a 5-letter word gets selected from a list of words already present in the 
-application.
+If one chooses to play *Guess The Word*, a 5-letter word gets selected from a list of around 120 words already present 
+in the application. In the following example, let's assume that the secret (or selected) word is `space`.
 ```bat
 New game:
+
+fruit:
+Correct Position: 0            //no match found
+Incorrect Position: 0
+
+crazy:
+Correct Position: 1            //letter a
+Incorrect Position: 1          //letter c
+
+slice:
+Correct Position: 3            //letters s,c,e 
+Incorrect Position: 0 
+
+space:
+Correct Position: 5            //guess matches secret word 
+Incorrect Position: 0         
 ```
-NOTE: The secret (or selected) word has 5 distinct letters.
+NOTE: The secret word has 5 distinct letters.
 
 As of now, there is no restriction on the number of guesses it takes to guess the secret word.
 So the game continues till the player guesses correctly. Once the goal is reached, a list of top-ten players and their
