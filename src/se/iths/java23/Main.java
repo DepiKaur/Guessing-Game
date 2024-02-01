@@ -38,6 +38,6 @@ public class Main {
 
         PlayerDao playerDao = new DatabasePlayerDao();
         GameController controller = new GameController(game, io, playerDao);
-        controller.play();
+        controller.play(io, playerDao);
     }
 }

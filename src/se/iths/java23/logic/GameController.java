@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * <p>
  * <h2>GameController</h2>
  * <p>
- * This controls the flow of the game and even shows the top ten players when a game is finished.
+ * This controls the flow of the game and even shows the top ten players when the game is finished.
  */
 
 public class GameController {
@@ -34,23 +34,14 @@ public class GameController {
     }
 
     /**
-     * This method starts the game, asks the player to login, checks if the player is already present
-     * in the database.
+     * This method starts the game with a player who is already present in the database.
      * A secret number/word gets generated which the player needs to guess.
      * Note that there is no restriction on the number of guesses.
      * When guessed correctly, the number of guesses is shown & the player is asked if he wants to continue or not.
      * @throws InterruptedException
      */
-    public void play() throws InterruptedException {
-        io.output("Enter your user name:\n");
-        String playerName = io.input();
-        int playerId = playerDao.getPlayerIdByName(playerName);              //login
-
-        if (playerId == 0) {
-            io.output("User not in database, please register with admin");
-            Thread.sleep(5000);
-            io.exit();
-        }
+    public void play(IO io, PlayerDao playerDao) throws InterruptedException {
+        int playerId = getIdOfValidPlayer(io, playerDao);
 
         while (isPlaying) {
             String secretNumber = game.generateNumberOrWord();
@@ -79,6 +70,27 @@ public class GameController {
                     + " guesses\nContinue?");
         }
         io.exit();
+    }
+
+    /**
+     * This method returns the id of the player already present in the database.
+     * If the playerId is zero, the application ends.
+     * @param io To get input from player.
+     * @param playerDao To get info from the database.
+     * @return The id of the player in the database.
+     * @throws InterruptedException when player is not found in the database and the sleep method on thread is called.
+     */
+    private int getIdOfValidPlayer(IO io, PlayerDao playerDao) throws InterruptedException {
+        io.output("Enter your user name:\n");
+        String playerName = io.input();
+        int playerId = playerDao.getPlayerIdByName(playerName);
+
+        if (playerId == 0) {
+            io.output("User not in database, please register with admin");
+            Thread.sleep(5000);
+            io.exit();
+        }
+        return playerId;
     }
 
     /**
