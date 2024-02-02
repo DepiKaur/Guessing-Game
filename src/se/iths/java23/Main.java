@@ -37,7 +37,7 @@ public class Main {
         //IO io = new SystemIO();
 
         PlayerDao playerDao = new DatabasePlayerDao();
-        GameController controller = new GameController(game, io, playerDao);
+        GameController controller = new GameController(game, io, playerDao);        //Dependency Injection
         controller.play();
     }
 }
