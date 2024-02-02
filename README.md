@@ -2,6 +2,15 @@
 This application is the result of refactoring another application (called MooOriginal) and cleaning that code according 
 to the Java's Code-Conventions so that it becomes testable, and then writing a few JUnit and Mockito tests.
 
+## Set-up before running this application
+One needs to connect to the database, before starting this application. In the following manner, you can write your 
+username and password. 
+
+Go to `src` --> `database` --> `DatabasePlayerDao` 
+
+In the DatabasePlayerDao class, at line 30, you can write the username and password to complete the connection with 
+your database. Make sure to add a user directly in the database before starting the application.
+
 ## Instructions to use this application
 
 In this application, there is a possibility to choose between 2 guessing games-
