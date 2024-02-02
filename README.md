@@ -7,8 +7,12 @@ One can connect to the database in the following manner:
 
 Go to `Project` --> `src` --> `database` --> `DatabasePlayerDao` 
 
-In the DatabasePlayerDao class's constructor, you can write the username and password to complete the connection with 
-your database. Make sure to add a user directly in the database before starting the application.
+In the DatabasePlayerDao class's constructor, you can replace the username and password with your own to complete the 
+connection with your database. 
+```bat
+connection = DriverManager.getConnection("jdbc:mysql://localhost/moo","username","password");
+```
+NOTE: A user must be present in the database before running the application.
 
 ## Instructions to use this application
 
@@ -45,7 +49,7 @@ New game:
 
 2164:       //guess3
 B,CC        //digit (4) at correct position, 
-              digits (1-2) at incorrect position
+            //digits (1-2) at incorrect position
 
 1264:       //guess4
 BBB,        //digits (1-2-4) at correct position
