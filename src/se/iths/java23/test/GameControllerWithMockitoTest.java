@@ -116,7 +116,7 @@ public class GameControllerWithMockitoTest {
         Collections.addAll(topTenPlayers, p1, p2, p3);
         when(playerDao.getAllPlayersAverage()).thenReturn(topTenPlayers);
 
-        gameController.play(mockIO, playerDao);
+        gameController.play();
 
         assertEquals(0, mockIO.getInputs().size());
         assertEquals(11, mockIO.getOutputs().size());

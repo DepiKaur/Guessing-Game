@@ -49,7 +49,7 @@ public class GameControllerTest {
         when(game.checkResult("5678","5678")).thenReturn(guessEv2);
         when(game.showResult(guessEv2)).thenReturn("BBBB,");
         when(game.isFinished("BBBB,")).thenReturn(true);
-        gameController.play(mockIO, mockDao);
+        gameController.play();
 
         assertEquals(0, mockIO.getInputs().size());
         assertEquals(11, mockIO.getOutputs().size());

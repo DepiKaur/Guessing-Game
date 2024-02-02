@@ -40,8 +40,8 @@ public class GameController {
      * When guessed correctly, the number of guesses is shown and the player is asked if he wants to continue or not.
      * @throws InterruptedException
      */
-    public void play(IO io, PlayerDao playerDao) throws InterruptedException {
-        int playerId = getIdOfValidPlayer(io, playerDao);
+    public void play() throws InterruptedException {
+        int playerId = getIdOfValidPlayer();
 
         while (isPlaying) {
             String secretNumber = game.generateNumberOrWord();
@@ -75,12 +75,10 @@ public class GameController {
     /**
      * This method returns the id of the player already present in the database.
      * If the playerId is zero, the application ends.
-     * @param io To get input from player.
-     * @param playerDao To get info from the database.
      * @return The id of the player in the database.
      * @throws InterruptedException when player is not found in the database and the sleep method on thread is called.
      */
-    private int getIdOfValidPlayer(IO io, PlayerDao playerDao) throws InterruptedException {
+    private int getIdOfValidPlayer() throws InterruptedException {
         io.output("Enter your user name:\n");
         String playerName = io.input();
         int playerId = playerDao.getPlayerIdByName(playerName);
