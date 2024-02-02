@@ -17,7 +17,7 @@ import se.iths.java23.logic.GuessingGame;
  * <p>
  * <h2>Main</h2>
  * <p>
- * This class contains the main method where the program starts.
+ * Main class contains the main method where the program starts.
  */
 
 public class Main {

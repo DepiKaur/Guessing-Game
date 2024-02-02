@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * <p>
  * <h2>GameController</h2>
  * <p>
- * This controls the flow of the game and even shows the top ten players when the game is finished.
+ * GameController controls the flow of the game and even shows the top ten players when the game is finished.
  */
 
 public class GameController {
@@ -38,7 +38,7 @@ public class GameController {
      * A secret number/word gets generated which the player needs to guess.
      * Note that there is no restriction on the number of guesses.
      * When guessed correctly, the number of guesses is shown and the player is asked if he wants to continue or not.
-     * @throws InterruptedException
+     * @throws InterruptedException because getIdOfPlayer() method throws exception.
      */
     public void play() throws InterruptedException {
         int playerId = getIdOfValidPlayer();

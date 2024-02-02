@@ -52,7 +52,7 @@ public class SimpleWindow {
 
         sPanel.add(inString,BorderLayout.CENTER);
         sPanel.add(go,BorderLayout.EAST);
-        window.setSize(450,500);
+        window.setSize(450,650);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocationByPlatform(true);
         window.setVisible(true);
