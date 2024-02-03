@@ -12,6 +12,7 @@ In the DatabasePlayerDao class's constructor, you will find the following-
 connection = DriverManager.getConnection("jdbc:mysql://localhost/schemaName","username","password");
 ```
 Here, you can replace schemaName with your own schema's name in database, and do likewise with username & password. 
+
 NOTE: A user must be present in the database before running the application.
 
 ## Instructions to use this application
