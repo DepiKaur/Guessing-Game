@@ -3,15 +3,15 @@ This application is the result of refactoring another application (called MooOri
 to the Java's Code-Conventions so that it becomes testable, and then writing a few JUnit and Mockito tests.
 
 ## Set-up required before running this application
-One can connect to the database in the following manner: 
+One *must* connect to the database. It can be done in the following manner: 
 
 Go to `Project` --> `src` --> `database` --> `DatabasePlayerDao` 
 
-In the DatabasePlayerDao class's constructor, you can replace the username and password with your own to complete the 
-connection with your database. 
+In the DatabasePlayerDao class's constructor, you will find the following-
 ```bat
-connection = DriverManager.getConnection("jdbc:mysql://localhost/moo","username","password");
+connection = DriverManager.getConnection("jdbc:mysql://localhost/schemaName","username","password");
 ```
+Here, you can replace schemaName with your own schema's name in database, and do likewise with username & password. 
 NOTE: A user must be present in the database before running the application.
 
 ## Instructions to use this application
