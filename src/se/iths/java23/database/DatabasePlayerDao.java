@@ -24,9 +24,10 @@ public class DatabasePlayerDao implements PlayerDao {
     private Connection connection;
     private Statement statement;
 
+    //write your username and password to connect with your database
     public DatabasePlayerDao() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/moo","DepiAdmin","Depi1234");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/schemaName","username","password");
         } catch (SQLException e) {
             throw new RuntimeException("DatabasePlayerDao Constructor error: " + e);
         }
