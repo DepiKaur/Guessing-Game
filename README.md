@@ -15,6 +15,20 @@ Here, you can replace schemaName with your own schema's name in database, and do
 
 NOTE: A user must be present in the database before running the application.
 
+### Following Libraries are required to run this application
+```bat
+mysql-connector-j-8.0.33
+```
+```bat
+junit-jupiter-5.8.1
+```
+```bat
+mockito-core-5.10.0
+```
+```bat
+mockito-junit-jupiter-5.10.0
+```
+
 ## Instructions to use this application
 
 In this application, there is a possibility to choose between 2 guessing games-
