@@ -118,3 +118,5 @@ average appears on the screen, along with the number of guesses it took to corre
 The application then asks if the player wants to continue playing the guessing game.
 * `y` means a new game starts.
 * `n` means the applications ends.
+
+Happy playing!  
